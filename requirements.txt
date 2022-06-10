@@ -1,0 +1,10 @@
+PyQt5
+PyQt5-Qt5
+PyQt5-sip
+pyinstaller
+PyMySQL # MySQL
+# PyODBC # MSSQL requires unixodbc-dev
+psycopg2-binary #PostgreSQL
+cx-Oracle # Oracle
+SQLAlchemy # ORM
+cryptography

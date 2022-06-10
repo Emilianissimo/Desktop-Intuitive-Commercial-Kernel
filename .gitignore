@@ -1,0 +1,6 @@
+__pycache__/
+ui/__pycache__/
+controllers/__pycache__/
+models/__pycache__/
+settings/__pycache__/
+.idea/
