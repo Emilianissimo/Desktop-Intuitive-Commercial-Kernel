@@ -1,3 +1,18 @@
+# Desktop Intuitive Commercial Kernel
+
+Behold! Well, this is just a simple "MVC" (kinda) PyQt5 Desktop framework.
+
+Included:
+- Authentication and sessions (db driven)
+- Models + ORM
+- Controllers (kinda)
+- DDD oriented style (trying to be)
+- Page Navigator by StackedWidget and working with router (also router with simple API)
+- Pre-open page provider to interfere process until route changed (like middleware)
+- Users model as example
+- Multilang interface (need to be refactored, but working well)
+- Nice password hashing
+
 # Getting started
 
 ### OS Linux (Ubuntu 20.04 LTS FF (Focal Fossa/focal))
