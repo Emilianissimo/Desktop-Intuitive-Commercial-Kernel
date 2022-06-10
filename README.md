@@ -1,11 +1,11 @@
 # Desktop Intuitive Commercial Kernel
 
-Behold! Well, this is just a simple "MVC" (kinda) PyQt5 Desktop framework.
+Behold! Well, this is just a simple MVP PyQt5 Desktop framework.
 
 Included:
 - Authentication and sessions (db driven)
 - Models + ORM
-- Controllers (kinda)
+- Controllers (Presenter)
 - DDD oriented style (trying to be)
 - Page Navigator by StackedWidget and working with router (also router with simple API)
 - Pre-open page provider to interfere process until route changed (like middleware)
@@ -41,4 +41,5 @@ If you'll use it, just recognize PyQt project.
 Copyrights
 -
 Source and Copyright of PyQt5 library - <a href="https://www.riverbankcomputing.com/software/pyqt/">PyQt5 is copyright (c) Riverbank Computing Limited</a>
+
 SQL Connector and ORM - <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
