@@ -40,6 +40,7 @@ CoreProvider.boot(widget) acts as a lifecycle hook:
 
 📁 Project Layout
 
+```
 app/
 ├── controllers/         # Page logic (MVC controllers)
 ├── models/              # SQLAlchemy models (User, Auth, etc.)
@@ -47,7 +48,7 @@ core/
 ├── window.py            # Router, page stack, signals
 ├── routes.py            # Page route declarations
 ├── providers/           # Lifecycle & global hooks
-
+```
 
 ⸻
 
