@@ -109,14 +109,6 @@ You will need Docker being installed.
 	•	Lightweight POS systems
 	•	Embedded tooling for offline environments
 
-⸻
-
-📜 License
-
-MIT — designed for freedom, shared with intent.
-
-⸻
-
 🤝 Author
 
 Emil Erofeevskiy
