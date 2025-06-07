@@ -1,45 +1,143 @@
-# Desktop Intuitive Commercial Kernel
+🖥️ Desktop Intuitive Commercial Kernel
 
-Behold! Well, this is just a simple MVP PyQt5 Desktop framework.
+A modular, production-ready desktop application framework built with PyQt5, designed for internal ERP/CRM tooling. It is a fully-functional, cleanly architected, signal-based interface framework that follows separation of concerns, scalable routing, and event-driven rendering — written with real-world use in mind.
 
-Included:
-- Authentication and sessions (db driven)
-- Models + ORM
-- Controllers (Presenter)
-- DDD oriented style (trying to be)
-- Page Navigator by StackedWidget and working with router (also router with simple API)
-- Pre-open page provider to interfere process until route changed (like middleware)
-- Users model as example
-- Multilang interface (need to be refactored, but working well)
-- Nice password hashing
+Originally created as a gesture of gratitude to a local vendor offering honest prices, this project now serves as a clean template for newcomers and professionals alike.
 
-# Getting started
+⸻
 
-### OS Linux (Ubuntu 20.04 LTS FF (Focal Fossa/focal))
-```bash
-    sudo apt-get install qt5-default
-```
+⚙️ Core Architecture
 
-To install qt on your system. Then just update pip requirements:
+1. Controllers as Pages
 
-```bash
-    pip3 install -r requirements.txt
-```
+Each page is a subclassed QMainWindow with:
+	•	Independent UI logic.
+	•	Connected signal/slot system.
+	•	Support for data reloading (render_data).
 
-If you're using MySQL (default), please create database and set it's name into settings/settings.py.
+2. Router System
+	•	routes.py holds a simple, extensible list of route definitions.
+	•	Pages (controllers) are dynamically imported and injected into a QStackedWidget.
+	•	Navigation is signal-based (gotoSignal) allowing clean page transitions.
 
-# Credits
+3. Provider Layer
 
-Developed by me, but GPL. Use it for free and share your solutions for free as examples.
-Also, you can sell it whatever, I don't care. Ofc is somebody will find this framework useful.
-If you'll use it, just recognize PyQt project.
+CoreProvider.boot(widget) acts as a lifecycle hook:
+	•	Automatically re-renders UI data when the page is opened.
+	•	Can be disabled for performance tuning.
 
-# Docs
+4. Data Layer
+	•	SQLAlchemy ORM models (User, etc.)
+	•	Authentication, password hashing (sha512 + salt)
+	•	Session storage with relationship binding
 
------- Will be soon. Maybe. no, really, it's simple.
+5. Modularity and Extensibility
+	•	Structure supports rapid creation of new modules (CRUD pages).
+	•	Designed with junior onboarding and enterprise extensibility in mind.
+	•	Localization hook via get_translate().
 
-Copyrights
--
-Source and Copyright of PyQt5 library - <a href="https://www.riverbankcomputing.com/software/pyqt/">PyQt5 is copyright (c) Riverbank Computing Limited</a>
+⸻
 
-SQL Connector and ORM - <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
+📁 Project Layout
+
+app/
+├── controllers/         # Page logic (MVC controllers)
+├── models/              # SQLAlchemy models (User, Auth, etc.)
+core/
+├── window.py            # Router, page stack, signals
+├── routes.py            # Page route declarations
+├── providers/           # Lifecycle & global hooks
+
+
+⸻
+
+✨ Features
+	•	🔐 JWT-based authentication with 2FA (via SMS)
+	•	🧾 Token refresh logic with secure storage
+	•	🛒 Cart system supporting both guests and authenticated users
+	•	📦 Modular product & order management
+	•	🧩 Middleware-based authorization (staff, guest, superuser)
+	•	📬 SMS adapter interface (adapter pattern for notificators)
+	•	⚙️ Async PostgreSQL with SQLAlchemy 2.0 style
+	•	🔄 Pragmatic error handling and validation
+	•	🧠 Clear separation of concerns (serializers, services, adapters)
+	•	🐳 Dockerized with ready-to-use Makefile
+
+⸻
+
+🚀 Getting Started
+
+🔧 Local Setup
+	1.	Install dependencies
+
+pip install -r requirements.txt
+
+	2.	Set environment variables
+Create a .env file:
+
+DATABASE_URL=postgresql+asyncpg://user:pass@localhost/dbname
+SECRET_KEY=your-super-secret
+ALGORITHM=HS256
+ENVIRONMENT=local
+
+	3.	Run locally
+
+make build
+make start
+make migrate
+
+You will need Docker being installed.
+
+⸻
+
+✅ Auth Flow (Summary)
+	1.	Login Attempt (no token):
+	•	Password is verified.
+	•	SMS 2FA code is sent.
+	•	In local mode, the code is returned in the response for testing.
+	2.	Login Attempt (with 2FA token):
+	•	If valid and not expired, JWT tokens are returned.
+	3.	Token Usage:
+	•	JWTs are validated via custom middleware (BaseAuthMiddleware, StaffMiddleware, etc.)
+	•	Behavior changes based on token source: cookie vs. header vs. guest.
+
+⸻
+
+💡 Use Cases
+	•	Internal dashboards
+	•	CRM/ERP modules
+	•	Lightweight POS systems
+	•	Embedded tooling for offline environments
+
+⸻
+
+📜 License
+
+MIT — designed for freedom, shared with intent.
+
+⸻
+
+🤝 Author
+
+Emil Erofeevskiy
+
+⸻
+
+📝 Additional Notes
+
+CartItem (Constructor object)
+	•	We need to save state of product, reduce states of pictures computed later. Or save picture with its state.
+	•	For the start we just save picture itself and pass ability to customize it for the customer.
+
+Format of picture
+	•	Fixed sizes (A4, A3), and positions:
+	•	Backside: top, center, left center, right center, bottom
+	•	Frontside: top, center, left center, right center, bottom
+
+Image uploading for canvas
+	•	Upload via endpoint → store under cart item → return permalink → use in canvas
+
+Datetimes
+	•	Everything stores in UTC.
+	•	Converts automatically to timezone on exit.
+	•	App auto-detects and handles datetime conversions.
