@@ -110,27 +110,8 @@ You will need Docker being installed.
 	•	Lightweight POS systems
 	•	Embedded tooling for offline environments
 
+⸻
+
 🤝 Author
 
 Emil Erofeevskiy
-
-⸻
-
-📝 Additional Notes
-
-CartItem (Constructor object)
-	•	We need to save state of product, reduce states of pictures computed later. Or save picture with its state.
-	•	For the start we just save picture itself and pass ability to customize it for the customer.
-
-Format of picture
-	•	Fixed sizes (A4, A3), and positions:
-	•	Backside: top, center, left center, right center, bottom
-	•	Frontside: top, center, left center, right center, bottom
-
-Image uploading for canvas
-	•	Upload via endpoint → store under cart item → return permalink → use in canvas
-
-Datetimes
-	•	Everything stores in UTC.
-	•	Converts automatically to timezone on exit.
-	•	App auto-detects and handles datetime conversions.
